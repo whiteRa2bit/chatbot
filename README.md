@@ -4,7 +4,7 @@ Educational project
 It's a russian chatbot trained using seq2seq model with attention mechanism. 
 To use the chatbot install the packages listed in requirments.txt, then launch the file model.py
 
-Then initialize in your project objects:
+Then initialize objects in your project:
 ```
 with open('./data/seq2seq.pk', 'rb') as f:
         data = pickle.load(f)
