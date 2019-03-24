@@ -8,11 +8,11 @@ Then initialize in your project objects:
 ```
 with open('./data/seq2seq.pk', 'rb') as f:
         data = pickle.load(f)
-    input_lang = data['input_lang']
-    output_lang = data['output_lang']
-    encoder = data['encoder']
-    attn_decoder = data['attn_decoder']
-    hidden_size = encoder.hidden_size
+input_lang = data['input_lang']
+output_lang = data['output_lang']
+encoder = data['encoder']
+attn_decoder = data['attn_decoder']
+hidden_size = encoder.hidden_size
 ```
 then just call function 
 ```
