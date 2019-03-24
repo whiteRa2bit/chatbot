@@ -256,7 +256,7 @@ def train(input_tensor, target_tensor, encoder, decoder, encoder_optimizer, deco
 
 
 
-def evaluate(encoder, decoder, sentence, max_length=MAX_LENGTH):
+def evaluate(input_lang, output_lang, encoder, decoder, sentence, max_length=MAX_LENGTH):
     with torch.no_grad():
         input_tensor = tensorFromSentence(input_lang, sentence)
         input_length = input_tensor.size()[0]
@@ -293,16 +293,6 @@ def evaluate(encoder, decoder, sentence, max_length=MAX_LENGTH):
 
 
 
-hidden_size = 256
-
-
-with open('./data/seq2seq.pk', 'rb') as f:
-    data = pickle.load(f)
-input_lang = data['input_lang']
-output_lang = data['output_lang']
-encoder = data['encoder']
-attn_decoder = data['attn_decoder']
-hidden_size = encoder.hidden_size
 
 
 def modify_output(output_words):
@@ -324,11 +314,11 @@ def modify_output(output_words):
         prev_sym = cur_sym
     return res
 
-def get_answer(input_sentence):
+def get_answer(input_sentence, input_lang, output_lang, encoder, attn_decoder):
     input_sentence = normalizeString(input_sentence)
     input_words = input_sentence.split()
     filtered_words = [word for word in input_words if word in input_lang.word2index]
     filtered_sentence = ' '.join(filtered_words)
-    output_words, attentions = evaluate(encoder, attn_decoder, filtered_sentence)
+    output_words, attentions = evaluate(input_lang, output_lang, encoder, attn_decoder, filtered_sentence)
     output_sentence = modify_output(output_words)
     return output_sentence
