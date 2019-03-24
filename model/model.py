@@ -331,7 +331,4 @@ def get_answer(input_sentence):
     filtered_sentence = ' '.join(filtered_words)
     output_words, attentions = evaluate(encoder, attn_decoder, filtered_sentence)
     output_sentence = modify_output(output_words)
-    print(output_sentence)
-
-
-get_answer("с тобой....")
+    return output_sentence
